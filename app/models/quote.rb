@@ -1,6 +1,6 @@
 class Quote < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   has_many :favorites
 
-  validates :quote, presence: true
+  validates :author, :quote, presence: true
 end

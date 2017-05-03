@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :quotes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
   validates :name, :alias, presence: true, length: { in: 2..40 }

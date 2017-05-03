@@ -1,3 +1,31 @@
 <h1>Welcome, <%= current_user.name %>!</h1>
 
 <h2>Quotable Quotes</h2>
+<div>
+  <% @quotes.each do |quote| %>
+  <div>
+    <h4><%= quote.author %>: <%= quote.quote %></h4>
+    <p>Posted by <a href='/users/<%= quote.user.id %>'><%= quote.user.name %></a></p>
+    <form action='/favorites' method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="favorite[quote_id]" value = "<%= quote.id %>">
+      <input type="submit" name="Add to My List" value = "Add to My List">
+    </form>
+  </div>
+  <% end %>
+</div>
+
+<h2>Your Favorite Quotes</h2>
+<div>
+  <% @favorites.each do |favorite| %>
+  <div>
+    <h4><%= favorite.quote.author %>: <%= favorite.quote.quote %></h4>
+    <p>Posted by <a href='/users/<%= favorite.user.id %>'><%= favorite.quote.user.name %></a></p>
+    <form action="/favorites/<%= favorite.id %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" name="Remove from My List" value = "Remove from My List">
+    </form>
+  </div>
+  <% end %>
+</div>
