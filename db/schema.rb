@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502234457) do
+ActiveRecord::Schema.define(version: 20170503023658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quote_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["quote_id"], name: "index_favorites_on_quote_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "quotes", force: :cascade do |t|
+    t.text     "quote"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "quotes", ["user_id"], name: "index_quotes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -26,4 +45,7 @@ ActiveRecord::Schema.define(version: 20170502234457) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "favorites", "quotes"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "quotes", "users"
 end
