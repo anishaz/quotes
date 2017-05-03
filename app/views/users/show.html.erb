@@ -2,4 +2,8 @@
 <%= link_to "Dashboard", quotes_path %>
 
 <h1>Posts by <%= @user.name %></h1>
-<h2>Count: </h2>
+<h2>Count: <%= @user.quotes.count %></h2>
+
+<% @quotes.each do |quote| %>
+<h4><%= quote.author %>: <%= quote.quote %></h4>
+<% end %>
