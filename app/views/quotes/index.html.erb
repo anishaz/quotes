@@ -29,3 +29,16 @@
   </div>
   <% end %>
 </div>
+<br>
+
+<form action="/quotes" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <fieldset>
+    <legend>Contribute a Quote</legend>
+    <label for="author">Quoted By:</label>
+    <input type="text" name="quote[author]">
+    <label for="quote">Message:</label>
+    <input type="text" name="quote[quote]"><br>
+    <button>Submit</button>
+  </fieldset>
+</form>

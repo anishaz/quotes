@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show'
 
   get 'quotes' => 'quotes#index', as: 'quotes'
+  post 'quotes' => 'quotes#create'
 
   post 'favorites' => 'favorites#create'
   delete 'favorites/:id' => 'favorites#destroy'
